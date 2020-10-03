@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col col-6 offset-3">
+            <div class="card border primary">
+                <div class="card-header text-center text-info text-uppercase">
+                   {{ existingScaleNumber ? 'Edit SCALE #' + existingScaleNumber : 'Create new Scale'}}  
+                </div>
+                <div class="card-body">
+                    <form [formGroup] = "scaleForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group row">
+                            <label for="scaleName" class="col-sm-4 col-form-label">Scale Name</label>
+                            <div class="col-sm-8">
+                              <input 
+                                formControlName="scaleName"
+                                [class.is-invalid] = "(scaleNameValidate.invalid && scaleNameValidate.touched)"
+                                type="name" class="form-control" id="name" name="name" 
+                                placeholder="Enter Scale Name(Ex:Pocket,Piece)" 
+                                required />
+                                <small *ngIf="scaleNameValidate.errors?.required && scaleNameValidate.touched" class="text-danger">Please provide Scale name.
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="isActive" class="col-sm-4 col-form-label">Is Active</label>
+                            <div class="col-sm-8">
+                                <input 
+                                formControlName="isActive"
+                                type="checkbox" class="form-check form-check-inline" id="isActive" name="isActive" 
+                                />
+                            </div>
+                        </div>
+            
+                        <div class=" text-center">
+                          <button class="btn btn-primary" [disabled]="!scaleForm.valid" type="submit">
+                            {{ existingScaleNumber ? 'Update' : 'Save'}}  
+                          </button>
+                          <button class="btn btn-light btn-cancel" routerLink="/scaledetail">
+                            Cancel
+                          </button>
+                        </div>
+            
+                      </form>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>

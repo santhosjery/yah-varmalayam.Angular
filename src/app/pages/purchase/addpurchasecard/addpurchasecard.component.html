@@ -1,0 +1,146 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col col-12 offset-0">
+            <div class="card border primary">
+                <div class="card-header text-center text-info text-uppercase">
+                   {{ existingPurchaseCardId ? 'Edit Purchase Card #' + existingPurchaseCardId : 'Create new Purchase Card'}}  
+                </div>
+                <div class="card-body">
+                    <form [formGroup] = "purchaseCardForm" (ngSubmit)="onSubmit()">
+                        <div class="form-row">
+                            <div class="form-group col-md-4 row">
+                                <label for="productId" class="col-sm-4 col-form-label">Select GST</label>
+                                <div class="col-sm-8">
+                                    <select formControlName="productId" class="form-control" 
+                                        [class.is-invalid] = "(productIdValidate.invalid && productIdValidate.touched)"
+                                        id="productId" name="productId" ngModel required>
+                                        <option value="" disabled selected hidden>Select Product Name</option>
+                                        <option *ngFor="let product of productDetail" value="{{product.productId}}">
+                                            {{ product.productName }}
+                                        </option>
+                                    </select>
+                                    <small *ngIf="productIdValidate.errors?.required && productIdValidate.touched" class="text-danger">
+                                        Please select the Product Name.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4 row">
+                                <label for="clientName" class="col-sm-4 col-form-label">Client Name</label>
+                                <div class="col-sm-8">
+                                <input 
+                                    formControlName="clientName"
+                                    type="clientName" class="form-control" id="clientName" name="clientName" 
+                                    placeholder="Enter Client Name" 
+                                    required />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4 row">
+                                <label for="clientMobileNumber" class="col-sm-4 col-form-label">Client Mobile</label>
+                                <div class="col-sm-8">
+                                <input 
+                                    formControlName="clientMobileNumber"
+                                    type="name" class="form-control" id="clientMobileNumber" name="clientMobileNumber" 
+                                    placeholder="Enter Mobile Number" 
+                                    required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4 row">
+                                <label for="packageTypeId" class="col-sm-4 col-form-label">Select Package Type</label>
+                                <div class="col-sm-8">
+                                    <select formControlName="packageTypeId" class="form-control" 
+                                        [class.is-invalid] = "(packageTypeIdValidate.invalid && packageTypeIdValidate.touched)"
+                                        id="packageTypeId" name="packageTypeId" ngModel required>
+                                        <option value="" disabled selected hidden>Select Package Type</option>
+                                        <option *ngFor="let package of packageTypeDetail" value="{{package.packageId}}">
+                                            {{ package.packageName }}
+                                        </option>
+                                    </select>
+                                    <small *ngIf="packageTypeIdValidate.errors?.required && packageTypeIdValidate.touched" class="text-danger">
+                                        Please select the Package type.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4 row">
+                                <label for="numberOfItems" class="col-sm-4 col-form-label">Number of Items</label>
+                                <div class="col-sm-8">
+                                <input 
+                                    formControlName="numberOfItems"
+                                    [class.is-invalid] = "(numberOfItemsValidate.invalid && numberOfItemsValidate.touched)"
+                                    type="name" class="form-control" id="numberOfItems" name="numberOfItems" 
+                                    placeholder="Number of Items" 
+                                    required />
+                                    <small *ngIf="numberOfItemsValidate.errors?.required && numberOfItemsValidate.touched" class="text-danger">Please provide the number of items.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4 row">
+                                <label for="amountPerItem" class="col-sm-4 col-form-label">Number of Items</label>
+                                <div class="col-sm-8">
+                                <input 
+                                    formControlName="amountPerItem"
+                                    [class.is-invalid] = "(amountPerItemValidate.invalid && amountPerItemValidate.touched)"
+                                    type="name" class="form-control" id="amountPerItem" name="amountPerItem" 
+                                    placeholder="Number of Items" 
+                                    required />
+                                    <small *ngIf="amountPerItemValidate.errors?.required && amountPerItemValidate.touched" class="text-danger">Please provide the amount.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4 row">
+                                <label for="gstId" class="col-sm-4 col-form-label">Select GST</label>
+                                <div class="col-sm-8">
+                                    <select formControlName="gstId" class="form-control" 
+                                        [class.is-invalid] = "(gstIdValidate.invalid && gstIdValidate.touched)"
+                                        id="gstId" name="gstId" ngModel required>
+                                        <option value="" disabled selected hidden>Select GST</option>
+                                        <option *ngFor="let gst of gstDetail" value="{{gst.GstId}}">
+                                            {{ gst.GstName }}
+                                        </option>
+                                    </select>
+                                    <small *ngIf="gstIdValidate.errors?.required && gstIdValidate.touched" class="text-danger">
+                                        Please select the GST type.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4 row">
+                                <label for="purchasedAmount" class="col-sm-4 col-form-label">Purchased Amount</label>
+                                <div class="col-sm-8">
+                                <input 
+                                    formControlName="purchasedAmount"
+                                    type="name" class="form-control" id="purchasedAmount" name="purchasedAmount" 
+                                    required />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4 row">
+                                <label for="sellingAmount" class="col-sm-4 col-form-label">Selling Amount</label>
+                                <div class="col-sm-8">
+                                <input 
+                                    formControlName="sellingAmount"
+                                    [class.is-invalid] = "(sellingAmountValidate.invalid && sellingAmountValidate.touched)"
+                                    type="name" class="form-control" id="sellingAmount" name="sellingAmount" 
+                                    placeholder="Selling amount" 
+                                    required />
+                                    <small *ngIf="sellingAmountValidate.errors?.required && sellingAmountValidate.touched" class="text-danger">Please provide the selling amount.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class=" text-center">
+                          <button class="btn btn-primary" [disabled]="!purchaseCardForm.valid" type="submit">
+                            Save
+                          </button>
+                        </div>
+                        <button class="btn btn-light btn-cancel" routerLink="/purchasecardlist">
+                            Cancel
+                        </button>
+                      </form>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>

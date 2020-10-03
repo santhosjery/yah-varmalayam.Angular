@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "yah-varmalayam"
+    }
+  },
+  "defaultProject": "yah-varmalayam",
+  "cli": {
+    "analytics": false
+  }
 }

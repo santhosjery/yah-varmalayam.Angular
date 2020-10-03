@@ -1,0 +1,9 @@
+<form [formGroup] = "form">
+    <select  class="form-control" [(ngModel)]="selectedId" formControlName="gstId"
+        id="roleId" name="roleId" ngModel required>
+        <option value="" disabled selected hidden>GST Name</option>
+        <option *ngFor="let _gst of _gstList" value="{{_gst.GstId}}">
+            {{ _gst.GstName }}
+        </option>
+    </select>
+</form>

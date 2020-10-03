@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col col-6 offset-3">
+            <div class="card border primary">
+                <div class="card-header text-center text-info text-uppercase">
+                    {{ existingProductId ? 'Edit Product #' + existingProductId : 'Create new Product'}}  
+                </div>
+                <div class="card-body">
+                    <form [formGroup] = "productForm" (ngSubmit)="onSubmit()">
+                        <div class="form-group row">
+                            <label for="productName" class="col-sm-4 col-form-label">Product Name</label>
+                            <div class="col-sm-8">
+                              <input 
+                                formControlName="productName"
+                                [class.is-invalid] = "(getProductNameValidate.invalid && getProductNameValidate.touched)"
+                                type="name" class="form-control" id="name" name="name" 
+                                placeholder="Enter Product Name" 
+                                required />
+                                <small *ngIf="getProductNameValidate.errors?.required && getProductNameValidate.touched" class="text-danger">Please provide the product name.
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="gstId" class="col-sm-4 col-form-label">GST (%)</label>
+                            <div class="col-sm-8">
+                              <select formControlName="gstId" class="form-control" 
+                                [class.is-invalid] = "(getGSTValidate.invalid && getGSTValidate.touched)"
+                                id="gstId" name="gstId" ngModel required>
+                                <option value="" disabled selected hidden>Access Level</option>
+                                <option *ngFor="let gst of gstDetail" value="{{gst.GstId}}">
+                                    {{ gst.GstName }}
+                                </option>
+                              </select>
+                                <small *ngIf="getGSTValidate.errors?.required && getGSTValidate.touched" class="text-danger">
+                                    Please select the GST (%).
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="isActive" class="col-sm-4 col-form-label">Is Active</label>
+                            <div class="col-sm-8">
+                                <input 
+                                formControlName="isActive"
+                                type="checkbox" class="form-check form-check-inline" id="isActive" name="isActive" 
+                                />
+                            </div>
+                        </div>
+            
+                        <div class=" text-center">
+                          <button class="btn btn-primary" [disabled]="!productForm.valid" type="submit">
+                            {{ existingProductId ? 'Update' : 'Save' }}  
+                          </button>
+                          <button class="btn btn-light btn-cancel" routerLink="/productdetail">
+                            Cancel
+                          </button>
+                        </div>
+            
+                      </form>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>

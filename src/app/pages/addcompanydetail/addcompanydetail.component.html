@@ -1,0 +1,111 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col col-12 offset-0">
+            <div class="card border primary">
+                <div class="card-header text-center text-info text-uppercase">
+                   {{ existingDetailId ? 'Edit Profile #' + existingDetailId : 'Create new Profile'}}  
+                </div>
+                <div class="card-body">
+                    <form [formGroup] = "companyDetailsForm" (ngSubmit)="onSubmit()">
+                        <div class="form-row">
+                            <div class="form-group col-md-6 row">
+                                <label for="profileName" class="col-sm-4 col-form-label">Profile Name</label>
+                                <div class="col-sm-8">
+                                  <input 
+                                    formControlName="profileName"
+                                    [class.is-invalid] = "(profileNameValidate.invalid && profileNameValidate.touched)"
+                                    type="name" class="form-control" id="profileName" name="profileName" 
+                                    placeholder="Enter Profile/Company Name" 
+                                    required />
+                                    <small *ngIf="profileNameValidate.errors?.required && profileNameValidate.touched" class="text-danger">Please provide Profile name.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 row">
+                                <label for="mobileNumber" class="col-sm-4 col-form-label">Mobile Number</label>
+                                <div class="col-sm-8">
+                                  <input 
+                                    formControlName="mobileNumber"
+                                    [class.is-invalid] = "(mobileNumberValidate.invalid && mobileNumberValidate.touched)"
+                                    type="number" class="form-control" id="mobileNumber" name="mobileNumber" 
+                                    placeholder="Enter Mobile number" 
+                                    required />
+                                    <small *ngIf="mobileNumberValidate.errors?.required && mobileNumberValidate.touched" class="text-danger">Please provide a valid mobile number.
+                                    </small>
+                                    <small *ngIf="mobileNumberValidate.errors?.pattern && mobileNumberValidate.touched" class="text-danger">Please provide a valid mobile number.
+                                  </small>
+                                </div>
+                              </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6 row">
+                                <label for="address" class="col-sm-4 col-form-label">Address</label>
+                                <div class="col-sm-8">
+                                  <textarea 
+                                    formControlName="address"
+                                    [class.is-invalid] = "(addressValidate.invalid && addressValidate.touched)"
+                                    class="form-control" id="address" name="address" 
+                                    placeholder="Enter Profile/Company Address" rows="3"
+                                    required></textarea>
+                                    <small *ngIf="addressValidate.errors?.required && addressValidate.touched" class="text-danger">Please provide the address.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 row">
+                                <label for="GSTINnumber" class="col-sm-4 col-form-label">GSTIN Number</label>
+                                <div class="col-sm-8">
+                                  <input 
+                                    formControlName="GSTINnumber"
+                                    type="namw" class="form-control" id="GSTINnumber" name="GSTINnumber" 
+                                    placeholder="Enter GSTIN number" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6 row">
+                                <label for="description1" class="col-sm-4 col-form-label">Description-1</label>
+                                <div class="col-sm-8">
+                                  <textarea 
+                                    formControlName="description1"
+                                    class="form-control" id="description1" name="description1" 
+                                    placeholder="Enter Profile/Company Description-1" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6 row">
+                                <label for="description2" class="col-sm-4 col-form-label">Description-2</label>
+                                <div class="col-sm-8">
+                                  <textarea 
+                                    formControlName="description2"
+                                    class="form-control" id="description2" name="description2" 
+                                    placeholder="Enter Profile/Company Description-2" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="isActive" class="col-sm-2 col-form-label">Is Active</label>
+                            <div class="col-sm-8">
+                                <input 
+                                formControlName="isActive"
+                                type="checkbox" class="form-check form-check-inline" id="isActive" name="isActive" 
+                                />
+                            </div>
+                        </div>  
+            
+                        <div class=" text-center">
+                          <button class="btn btn-primary" [disabled]="!companyDetailsForm.valid" type="submit">
+                            Sign Up
+                          </button>
+                          <button class="btn btn-light btn-cancel" routerLink="/companydetail">
+                            Cancel
+                          </button>
+                        </div>
+            
+                      </form>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
